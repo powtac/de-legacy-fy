@@ -42,9 +42,10 @@ class XdebugTraceParser
 
             if (\count($line) > 9 && $line[5] == $unit) {
                 $parameters = \array_map('trim', \array_slice($line, 11, $line[10]));
+                $level = $line[0];
             }
 
-            if ($parameters !== null && \count($line) == 6 && $line[2] == 'R') {
+            if ($parameters !== null && $level == $line[0] && \count($line) == 6 && $line[2] == 'R') {
                 $data[]     = \array_merge([\trim($line[5])], $parameters);
                 $parameters = null;
             }
