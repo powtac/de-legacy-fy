@@ -40,7 +40,7 @@ class XdebugTraceParser
                 continue;
             }
 
-            if (\count($line) == 13 && $line[5] == $unit) {
+            if (\count($line) > 9 && $line[5] == $unit) {
                 $parameters = \array_map('trim', \array_slice($line, 11, $line[10]));
             }
 
