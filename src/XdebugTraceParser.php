@@ -40,7 +40,7 @@ class XdebugTraceParser
                 continue;
             }
 
-            if (\count($line) > 9 && $line[5] == $unit) {
+            if (\count($line) > 9 && $line[5] == $unit && $parameters === null) {
                 $parameters = \array_map('trim', \array_slice($line, 11, $line[10]));
                 $level = $line[0];
             }
@@ -52,7 +52,9 @@ class XdebugTraceParser
         }
 
         \fclose($fh);
-
+		
+		$data = array_unique($data);
+		
         return $data;
     }
 }
