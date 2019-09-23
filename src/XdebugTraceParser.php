@@ -53,8 +53,24 @@ class XdebugTraceParser
 
         \fclose($fh);
 		
-		$data = array_unique($data);
+		$data = \array_values(self::super_unique($data));
 		
         return $data;
     }
+
+    /**
+     * See https://www.php.net/manual/function.array-unique.php#97285
+     */
+	protected static function super_unique(array $array): array
+	{
+		$result = \array_map("unserialize", \array_unique(\array_map("serialize", $array)));
+	
+	  	foreach ($result as $key => $value) {
+			if ( is_array($value) ) {
+		  		$result[$key] = super_unique($value);
+			}
+	  	}
+	
+	  	return $result;
+	}
 }
