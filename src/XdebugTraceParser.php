@@ -67,7 +67,7 @@ class XdebugTraceParser
 	
 	  	foreach ($result as $key => $value) {
 			if ( is_array($value) ) {
-		  		$result[$key] = super_unique($value);
+		  		$result[$key] = self::super_unique($value);
 			}
 	  	}
 	
